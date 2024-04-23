@@ -9,8 +9,8 @@ export const NAVIGATORS = [
 		name: '시리즈'
 	},
 	{
-		path: '/categories',
-		name: '카테고리'
+		path: '/tags',
+		name: '태그'
 	}
 ] satisfies Navigator[];
 

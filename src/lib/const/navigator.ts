@@ -11,6 +11,10 @@ export const NAVIGATORS = [
 	{
 		path: '/tags',
 		name: '태그'
+	},
+	{
+		path: '/about',
+		name: '소개'
 	}
 ] satisfies Navigator[];
 

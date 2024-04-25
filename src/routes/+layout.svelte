@@ -27,7 +27,7 @@
 	>
 		<div class={classNames('w-fit h-full', 'flex items-center')}>
 			<Link path={HOME_PATH}>
-				<LogoImage slot="content" />
+				<LogoImage />
 			</Link>
 		</div>
 		<div class={classNames('w-fit h-full', 'flex items-center gap-5')}>
@@ -46,7 +46,7 @@
 						)}
 						path={navigator.path}
 						{isActive}
-						><span slot="content" class={classNames('text-lg', { 'font-thin': !isActive })}>
+						><span class={classNames('text-lg', { 'font-thin': !isActive })}>
 							{navigator.name}
 						</span>
 						<div
@@ -63,7 +63,7 @@
 					<IconSunHigh slot="icon" size={DEFAULT_ICON_SIZE} />
 				</IconBox>
 				<Link path={GITHUB_LINK} target="_blank" rel="noreferrer noopener">
-					<IconBox slot="content">
+					<IconBox>
 						<IconBrandGithubFilled slot="icon" size={DEFAULT_ICON_SIZE} />
 					</IconBox>
 				</Link>
@@ -71,7 +71,7 @@
 		</div>
 	</header>
 
-	<main class={classNames('my-6 px-4', 'grow flex flex-col items-center justify-center')}>
+	<main class={classNames('my-6 px-4', 'grow flex flex-col items-center')}>
 		<slot></slot>
 	</main>
 

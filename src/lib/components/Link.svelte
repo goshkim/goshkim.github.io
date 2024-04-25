@@ -16,7 +16,7 @@
 	on:mouseenter={() => (isHover = true)}
 	on:mouseleave={() => (isHover = false)}
 >
-	<slot name="content"></slot>
+	<slot></slot>
 	{#if isActive || isHover}
 		<slot name="highlighter"></slot>
 	{/if}

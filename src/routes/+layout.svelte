@@ -60,11 +60,11 @@
 			<div class={classNames('w-fit h-fit', 'flex items-center gap-4')}>
 				<!-- TODO: 다크모드 구현 -->
 				<IconBox>
-					<IconSunHigh slot="icon" size={DEFAULT_ICON_SIZE} />
+					<IconSunHigh size={DEFAULT_ICON_SIZE} />
 				</IconBox>
 				<Link path={GITHUB_LINK} target="_blank" rel="noreferrer noopener">
 					<IconBox>
-						<IconBrandGithubFilled slot="icon" size={DEFAULT_ICON_SIZE} />
+						<IconBrandGithubFilled size={DEFAULT_ICON_SIZE} />
 					</IconBox>
 				</Link>
 			</div>

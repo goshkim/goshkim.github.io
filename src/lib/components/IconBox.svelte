@@ -15,5 +15,5 @@
 	type="button"
 	on:click={onClick}
 >
-	<slot name="icon"></slot>
+	<slot></slot>
 </button>

@@ -35,3 +35,10 @@ export const getPosts = async (params: PostSearchParams = {}) => {
 		(p1, p2) => new Date(p2.createdAt).getTime() - new Date(p1.createdAt).getTime()
 	);
 };
+
+export const getTags = async () => {
+	const posts = await getPosts();
+	const tags = new Set();
+	posts.forEach((post) => post.tags.forEach((tag) => tags.add(tag)));
+	return [...tags];
+};

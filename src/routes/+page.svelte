@@ -84,7 +84,7 @@
 		<h1 class={classNames('mb-1.5', 'text-lg font-medium')}>태그 목록</h1>
 		<div class={classNames('flex flex-col gap-1')}>
 			{#each data.tags as tag (tag)}
-				<Link path={`/tags/${tag}`} className="hover:underline underline-offset-2">
+				<Link path={'/'} className="hover:underline underline-offset-2">
 					{tag}
 				</Link>
 			{/each}

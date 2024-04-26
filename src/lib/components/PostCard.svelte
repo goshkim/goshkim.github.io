@@ -20,7 +20,7 @@
 >
 	<div class="grow flex flex-col gap-2">
 		<h1 class={classNames('text-2xl font-medium', 'break-words line-clamp-2')}>
-			<Link path={`/${title}`}>
+			<Link path={'/'}>
 				{title}
 			</Link>
 		</h1>
@@ -32,7 +32,7 @@
 	</div>
 	<div class="flex items-center gap-2">
 		{#each tags as tag (tag)}
-			<Link path={`/tags/${tag}`}>
+			<Link path={'/'}>
 				<Tag>{tag}</Tag>
 			</Link>
 		{/each}

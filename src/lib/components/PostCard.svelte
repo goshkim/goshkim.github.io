@@ -24,6 +24,7 @@
 				{title}
 			</Link>
 		</h1>
+		<!-- TODO: 시간 형식 변경 -->
 		<p class="text-sm">{createdAt}</p>
 		<p class={classNames('break-words line-clamp-2', 'leading-5')}>
 			{description}

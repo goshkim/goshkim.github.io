@@ -2,7 +2,6 @@
 	import classNames from 'classnames';
 	import { IconCircleX, IconSearch } from '@tabler/icons-svelte';
 	import type { PageData } from './$types';
-	import { goto } from '$app/navigation';
 
 	import PostCard from '$lib/components/PostCard.svelte';
 	import Link from '$lib/components/Link.svelte';
@@ -44,7 +43,6 @@
 				return;
 			}
 
-			goto(`/?title=${searchTitle}`);
 			const posts = await getPosts({ title: searchTitle });
 			data = { ...data, posts };
 		}}

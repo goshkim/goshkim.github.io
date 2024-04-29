@@ -6,6 +6,7 @@ tags:
   - sveltekit
   - tailwindcss
 createdAt: '2024-04-23T03:00:00.000'
+slug: 3/post3.md
 ---
 
 ## Slay

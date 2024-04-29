@@ -7,7 +7,7 @@
 
 	export let post: Post;
 
-	const { title, description, tags, createdAt } = post;
+	const { title, description, tags, createdAt, slug } = post;
 </script>
 
 <article

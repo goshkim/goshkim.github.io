@@ -4,6 +4,7 @@ export interface Post {
 	tags: string[];
 	series?: string;
 	createdAt: string;
+	slug: string;
 }
 
 export interface PostsData {
@@ -14,8 +15,8 @@ export interface PostSearchParams {
 	title?: string;
 }
 
-export const getPosts = async (params: PostSearchParams = {}) => {
-	let posts = [];
+export const getPosts = async () => {
+	const posts = [];
 	const postFilePaths = import.meta.glob('/src/lib/posts/**/*.md', { eager: true });
 
 	for (const postFilePath in postFilePaths) {
@@ -25,10 +26,6 @@ export const getPosts = async (params: PostSearchParams = {}) => {
 			const post = postFile.metadata as Post;
 			posts.push(post);
 		}
-	}
-
-	if (params && params.title) {
-		posts = posts.filter((post) => post.title === params.title);
 	}
 
 	return posts.sort(

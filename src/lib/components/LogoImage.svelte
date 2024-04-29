@@ -1,5 +1,6 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.png';
+	import logoSvg from '$lib/assets/logo.svg';
 
 	export let className: string | undefined = undefined;
 	export let size: number | `${number}` | undefined = 140;

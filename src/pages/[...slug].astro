@@ -1,0 +1,140 @@
+---
+import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
+
+import { Badge } from '@/components/ui/badge';
+import { Link } from '@/components/ui/link';
+import { Separator } from '@/components/ui/separator';
+import PostLayout from '@/layouts/post-layout.astro';
+import { getPosts } from '@/lib/posts';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts();
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { ...post },
+  }));
+}) satisfies GetStaticPaths;
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { slug }: Params = Astro.params;
+const {
+  data: { title, excerpt, tags, series, nextPost, prevPost, publishedDate },
+  render,
+} = Astro.props;
+const { Content, headings } = await render();
+---
+
+<PostLayout seo={{ title: title, description: excerpt }}>
+  <article class="flex flex-col gap-y-12">
+    <div class="flex flex-col gap-y-6 text-default-900 dark:text-default-50">
+      <h1 class="text-5xl font-extrabold tracking-tighter">
+        {title}
+      </h1>
+      <div class="flex justify-between text-sm font-medium">
+        <!-- TODO: 프로필 카드, 상대 시간 표시, 읽는 시간 추가 -->
+        <strong>프로필 카드</strong>
+        <time>{publishedDate.toLocaleDateString()}</time>
+      </div>
+      <ul class="flex flex-wrap gap-x-2 gap-y-1">
+        {
+          tags.map(tag => (
+            <li>
+              <a href={`/tags/${tag}`}>
+                <Badge variant="filled" color="primary" size="sm" clickable>
+                  {tag}
+                </Badge>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <Separator />
+
+    {
+      series && (
+        <div class="flex flex-col gap-y-2 rounded-md bg-default-100 p-4 dark:bg-default-800">
+          <h5 class="font-semibold tracking-tighter text-default-900 dark:text-default-50">
+            '{series.name}' 시리즈
+          </h5>
+          <ul class="flex list-inside list-decimal flex-col gap-y-1 text-sm">
+            {series.entries.map(entry => (
+              <li>
+                <Link
+                  href={`/${entry.slug}`}
+                  underline="hover"
+                  data-active={slug === entry.slug}
+                  className="hover:text-primary-500 data-[active=true]:text-primary-500 dark:hover:text-primary-400 dark:data-[active=true]:text-primary-400"
+                >
+                  {entry.data.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    <div class="prose prose-slate dark:prose-invert">
+      <Content />
+    </div>
+
+    <!-- TOOD: 이전, 다음 게시글 ui 수정 -->
+    {
+      nextPost && (
+        <div class="flex flex-col gap-y-2">
+          <h5 class="font-semibold tracking-tighter text-default-900 dark:text-default-50">
+            다음 게시글
+          </h5>
+          <Link
+            underline="hover"
+            href={`/${nextPost.slug}`}
+            className="hover:text-primary-500 dark:hover:text-primary-400"
+          >
+            {nextPost.data.title}
+          </Link>
+        </div>
+      )
+    }
+
+    {
+      prevPost && (
+        <div class="flex flex-col gap-y-2">
+          <h5 class="font-semibold tracking-tighter text-default-900 dark:text-default-50">
+            이전 게시글
+          </h5>
+          <Link
+            underline="hover"
+            href={`/${prevPost.slug}`}
+            className="hover:text-primary-500 dark:hover:text-primary-400"
+          >
+            {prevPost.data.title}
+          </Link>
+        </div>
+      )
+    }
+
+    <!-- TODO: giscus 테마 커스터마이징 -->
+    <div class="giscus"></div>
+  </article>
+
+  <!-- TODO: toc 완성 -->
+  <ul slot="toc" class="flex flex-col">
+    {
+      headings.map(({ slug, depth, text }) => (
+        <li>
+          <Link
+            href={`#${slug}`}
+            underline="none"
+            className="text-sm hover:text-primary-500 dark:hover:text-primary-400"
+          >
+            {text}
+          </Link>
+        </li>
+      ))
+    }
+  </ul>
+</PostLayout>

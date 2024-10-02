@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 
+import PostCardList from '@/components/post-card-list.astro';
 import { Badge } from '@/components/ui/badge';
-import { Link } from '@/components/ui/link';
 import PageLayout from '@/layouts/page-layout.astro';
 import { getPostsGroupByTag, getTags } from '@/lib/posts';
 
@@ -58,17 +58,7 @@ const tags = await getTags();
     <h5 class="font-bold tracking-tighter text-default-900 dark:text-default-50">
       {`'${slug}' 태그의 게시글 목록`}
     </h5>
-    <ul>
-      {
-        posts.map(post => (
-          <li>
-            <Link href={`/${post.slug}`} className="text-sm">
-              {post.data.title}
-            </Link>
-          </li>
-        ))
-      }
-    </ul>
+    <PostCardList posts={posts} />
   </div>
 
   <script>

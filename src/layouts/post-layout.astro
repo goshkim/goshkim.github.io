@@ -1,0 +1,48 @@
+---
+import '@/styles/post.css';
+
+import Footer from '@/components/footer.astro';
+import Header from '@/components/header.astro';
+import BaseLayout, { type Props as BaseLayoutProps } from '@/layouts/base-layout.astro';
+
+type Props = BaseLayoutProps;
+
+const { seo } = Astro.props;
+---
+
+<BaseLayout seo={seo}>
+  <Fragment slot="extra-heads">
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="goshkim/goshkim.github.io"
+      data-repo-id="R_kgDOM6Jf3g"
+      data-category="Comments"
+      data-category-id="DIC_kwDOM6Jf3s4Ci-ne"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="transparent_dark"
+      data-lang="ko"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async></script>
+  </Fragment>
+
+  <Header />
+  <main class="my-6 min-h-screen px-3 lg:px-6">
+    <div class="mx-auto w-full max-w-screen-sm">
+      <slot />
+    </div>
+    <aside
+      class="fixed left-auto right-[max(0px,calc(50%-50rem))] top-16 hidden h-full w-80 overflow-y-auto px-6 xl:block"
+    >
+      <nav class="flex flex-col gap-y-2 p-6 pb-36">
+        <h5 class="font-bold tracking-tighter text-default-900 dark:text-default-50">목차</h5>
+        <slot name="toc" />
+      </nav>
+    </aside>
+  </main>
+  <Footer />
+</BaseLayout>

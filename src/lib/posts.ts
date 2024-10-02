@@ -1,10 +1,29 @@
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
 
 export const getPosts = async () => {
-  const publishedPosts = await getCollection('posts', ({ data }) => data.isDraft !== true);
-  return publishedPosts.sort(
+  const posts = await getCollection('posts', ({ data }) => data.isDraft !== true);
+  const sortedPosts = posts.sort(
     ({ data: prevPostData }, { data: nextPostData }) =>
       nextPostData.publishedDate.getTime() - prevPostData.publishedDate.getTime(),
+  );
+
+  return await Promise.all(
+    sortedPosts.map(async publishedPost => {
+      const { series, prevPost, nextPost } = publishedPost.data;
+
+      return {
+        ...publishedPost,
+        data: {
+          ...publishedPost.data,
+          series: series && {
+            name: series.name,
+            entries: await Promise.all(series.entries.map(entry => getEntry(entry))),
+          },
+          prevPost: prevPost && (await getEntry(prevPost)),
+          nextPost: nextPost && (await getEntry(nextPost)),
+        },
+      };
+    }),
   );
 };
 

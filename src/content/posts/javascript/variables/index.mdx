@@ -1,0 +1,47 @@
+---
+isDraft: false
+slug: javascript_variables
+title: 자바스크립트에서 변수를 선언하는 방법
+category: 자바스크립트
+excerpt: 자바스크립트에서 변수를 선언하는 방법에는 `var`, `let`, `const`가 있습니다. 각각의 특징을 알아봅시다.
+tags: [자바스크립트, 변수, 프로그래밍]
+series:
+  name: 자바스크립트 기본
+  entries:
+    - javascript_variables
+    - javascript_arrow_function
+    - javascript_data_types
+nextPost: javascript_arrow_function
+thumbnail: src/assets/javascript.png
+publishedDate: 2024-09-20T00:00:00
+---
+
+자바스크립트에서 변수를 선언하는 방법에는 세 가지가 있습니다: `var`, `let`, `const`. 이들은 서로 다른 특징과 용도를 가지고 있습니다.
+
+### `var`
+
+`var`는 자바스크립트에서 가장 오래된 변수 선언 방식입니다. 함수 스코프를 가지며, 재선언이 가능합니다.
+
+```javascript
+var x = 10;
+x = 20; // 가능
+```
+
+### `let`
+
+`let`은 블록 스코프를 가지며, 재선언이 불가능합니다. var보다 안전하게 변수를 사용할 수 있습니다.
+
+```javascript
+let y = 10;
+y = 20; // 가능
+let y = 30; // 불가능, 에러 발생
+```
+
+### `const`
+
+`const`는 상수를 선언할 때 사용됩니다. 값이 변경되지 않는 변수를 선언할 때 사용하며, 객체나 배열의 경우 참조만 불변입니다.
+
+```javascript
+const z = 10;
+z = 20; // 불가능, 에러 발생
+```

@@ -1,0 +1,42 @@
+---
+isDraft: false
+slug: javascript_arrow_function
+title: 자바스크립트에서 화살표 함수 사용하기
+category: 자바스크립트
+excerpt: 화살표 함수는 자바스크립트의 간결한 함수 표현식입니다. 기존 함수와 다른 특징을 가지고 있습니다.
+tags: [자바스크립트, 화살표 함수, 프로그래밍]
+series:
+  name: 자바스크립트 기본
+  entries:
+    - javascript_variables
+    - javascript_arrow_function
+    - javascript_data_types
+prevPost: javascript_variables
+nextPost: javascript_data_types
+thumbnail: src/assets/javascript.png
+publishedDate: 2024-09-22T00:00:00
+---
+
+화살표 함수는 ES6에서 도입된 자바스크립트의 간결한 함수 표현식입니다. 기존의 `function` 키워드와는 다른 특징을 가지고 있습니다.
+
+### 기본 문법
+
+```javascript
+const add = (a, b) => a + b;
+console.log(add(2, 3)); // 5
+```
+
+### 기존 함수와의 차이점
+
+1. this 바인딩: 화살표 함수는 this를 자신의 컨텍스트가 아닌, 상위 스코프에서 가져옵니다. 이 점은 일반 함수와 중요한 차이점입니다.
+2. 간결한 문법: 화살표 함수는 단일 식일 때 중괄호와 return 키워드를 생략할 수 있습니다.
+
+```javascript
+function regularFunction() {
+  console.log(this);
+}
+
+const arrowFunction = () => {
+  console.log(this);
+};
+```

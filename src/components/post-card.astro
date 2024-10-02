@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import { Badge } from '@/components/ui/badge';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Link } from '@/components/ui/link';
+
+type Props = CollectionEntry<'posts'>;
+
+const {
+  slug,
+  data: { title, thumbnail, excerpt, tags, publishedDate },
+} = Astro.props;
+const postUrl = `/${slug}`;
+---
+
+<Card
+  className="group flex w-full flex-row items-center justify-between gap-x-2 border-none shadow-none"
+>
+  <div class="flex grow flex-col">
+    <CardHeader className="gap-y-1 px-0">
+      <Link
+        href={postUrl}
+        underline="hover"
+        className="text-default-900 hover:text-primary-500 dark:text-default-50 dark:hover:text-primary-400"
+      >
+        <CardTitle className="text-xl">{title}</CardTitle>
+      </Link>
+      <CardDescription className="line-clamp-1 break-all">{excerpt}</CardDescription>
+    </CardHeader>
+    <CardContent className="flex items-center gap-x-2 px-0 text-sm">
+      {
+        tags.map(tag => (
+          <a href={`/tags/${tag}`}>
+            <Badge variant="filled" color="primary" size="sm" clickable>
+              {tag}
+            </Badge>
+          </a>
+        ))
+      }
+    </CardContent>
+    <CardFooter className="px-0 text-sm">
+      <!-- TODO: 상대 시간으로 변경, 읽는 시간 .  -->
+      <time>{publishedDate.toDateString()}</time>
+    </CardFooter>
+  </div>
+  <Link href={postUrl} className="hidden h-fit w-48 shrink-0 overflow-hidden md:block">
+    <img
+      src={thumbnail.src}
+      class="object-cover transition-transform duration-200 ease-in-out group-hover:scale-110"
+    />
+  </Link>
+</Card>

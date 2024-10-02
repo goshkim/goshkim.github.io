@@ -1,0 +1,84 @@
+---
+import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
+
+import { Badge } from '@/components/ui/badge';
+import { Link } from '@/components/ui/link';
+import PageLayout from '@/layouts/page-layout.astro';
+import { getPostsGroupByTag, getTags } from '@/lib/posts';
+
+export const getStaticPaths = (async () => {
+  const posts = await getPostsGroupByTag();
+  return Object.entries(posts).map(([key, entries]) => ({
+    params: { slug: key },
+    props: { posts: entries },
+  }));
+}) satisfies GetStaticPaths;
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { slug }: Params = Astro.params;
+const { posts } = Astro.props;
+
+const tags = await getTags();
+---
+
+<PageLayout seo={{ title: `'${slug}' 태그의 게시글 목록` }}>
+  <div class="flex flex-col gap-y-4">
+    <h5 class="font-bold tracking-tighter text-default-900 dark:text-default-50">태그 목록</h5>
+    <ul class="flex max-h-52 flex-wrap gap-2 overflow-y-auto">
+      {
+        tags.map(tag => {
+          const isActive = tag === slug;
+          const isClickable = !isActive;
+          const isDismissible = isActive;
+
+          return (
+            <li>
+              <a href={isActive ? undefined : `/tags/${tag}`}>
+                <Badge
+                  variant="filled"
+                  color="primary"
+                  size="sm"
+                  clickable={isClickable}
+                  dismissible={isDismissible}
+                >
+                  {tag}
+                </Badge>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+
+  <!-- TODO: 태그 게시글 ui 수정 -->
+  <div class="mt-20 flex flex-col gap-y-2">
+    <h5 class="font-bold tracking-tighter text-default-900 dark:text-default-50">
+      {`'${slug}' 태그의 게시글 목록`}
+    </h5>
+    <ul>
+      {
+        posts.map(post => (
+          <li>
+            <Link href={`/${post.slug}`} className="text-sm">
+              {post.data.title}
+            </Link>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <script>
+    document.querySelectorAll('#dismiss-button').forEach(dismissButton =>
+      dismissButton.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        window.location.href = '/tags';
+      }),
+    );
+  </script>
+</PageLayout>

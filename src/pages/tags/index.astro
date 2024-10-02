@@ -1,0 +1,26 @@
+---
+import { Badge } from '@/components/ui/badge';
+import PageLayout from '@/layouts/page-layout.astro';
+import { getTags } from '@/lib/posts';
+
+const tags = await getTags();
+---
+
+<PageLayout seo={{ title: '태그 목록' }}>
+  <div class="flex flex-col gap-y-4">
+    <h5 class="font-bold tracking-tighter text-default-900 dark:text-default-50">태그 목록</h5>
+    <ul class="flex flex-wrap gap-2">
+      {
+        tags.map(tag => (
+          <li>
+            <a href={`/tags/${tag}`}>
+              <Badge variant="filled" color="primary" size="sm" clickable>
+                {tag}
+              </Badge>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</PageLayout>

@@ -1,0 +1,19 @@
+---
+import Footer from '@/components/footer.astro';
+import Header from '@/components/header.astro';
+import BaseLayout, { type Props as BaseLayoutProps } from '@/layouts/base-layout.astro';
+
+type Props = BaseLayoutProps;
+
+const { seo } = Astro.props;
+---
+
+<BaseLayout seo={seo}>
+  <Header />
+  <main class="my-6 min-h-screen px-3 lg:px-6">
+    <div class="mx-auto w-full max-w-screen-lg">
+      <slot />
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

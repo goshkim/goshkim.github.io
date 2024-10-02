@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import PostCard from '@/components/post-card.astro';
+import { Separator } from '@/components/ui/separator';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="flex flex-col gap-y-6">
+  {
+    posts.map(post => (
+      <>
+        <li>
+          <PostCard {...post} />
+        </li>
+        <Separator className="last:hidden" />
+      </>
+    ))
+  }
+</ul>

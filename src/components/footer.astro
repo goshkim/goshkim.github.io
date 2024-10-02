@@ -1,0 +1,37 @@
+---
+import { Link } from '@/components/ui/link';
+import { SITE } from '@/config';
+
+const navItems = [
+  { href: `mailto:goshk1995@gmail.com`, text: '이메일' },
+  { href: '/sitemap-index.xml', text: '사이트맵' },
+  { href: '/rss.xml', text: 'RSS 피드' },
+];
+---
+
+<footer class="z-30 flex h-16 w-full items-center text-xs">
+  <div
+    class="mx-auto flex w-full max-w-screen-2xl flex-col-reverse items-center justify-center gap-y-3 px-3 lg:flex-row lg:gap-x-8 lg:px-6"
+  >
+    <p class="flex items-center gap-x-1">
+      Copyright &copy; {new Date().getFullYear()}
+      {SITE.title}.
+      <Link href="https://astro.build/" underline="hover" isExternal>
+        Built with {Astro.generator}
+      </Link>
+    </p>
+    <nav>
+      <ul class="flex items-center gap-x-8">
+        {
+          navItems.map(navItem => (
+            <li>
+              <Link href={navItem.href} underline="hover">
+                {navItem.text}
+              </Link>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</footer>

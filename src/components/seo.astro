@@ -1,0 +1,51 @@
+---
+import { SITE } from '@/config';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  openGraph?: {
+    type?: string;
+    title?: string;
+    description?: string;
+    url?: string;
+    image?: string;
+  };
+  twitter?: {
+    card: 'summary' | 'summary_large_image' | 'app' | 'player';
+    site?: string;
+    title?: string;
+    description?: string;
+    image?: string;
+  };
+}
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+  image = new URL(SITE.image, Astro.site),
+  openGraph,
+  twitter,
+} = Astro.props;
+---
+
+<!-- base -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+<!-- open graph -->
+<meta property="og:type" content={openGraph?.type ?? 'website'} />
+<meta property="og:title" content={openGraph?.title ?? title} />
+<meta property="og:description" content={openGraph?.description ?? description} />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:image" content={openGraph?.image ?? image} />
+
+<!-- twitter -->
+<meta property="twitter:card" content={twitter?.card ?? 'summary_large_image'} />
+<meta property="twitter:title" content={twitter?.title ?? title} />
+<meta property="twitter:description" content={twitter?.description ?? description} />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:image" content={twitter?.image ?? image} />

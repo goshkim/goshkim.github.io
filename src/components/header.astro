@@ -1,10 +1,12 @@
 ---
-import { Search } from 'lucide-react';
-
 import NavDropdownMenu from '@/components/nav-dropdown-menu';
+import SearchCommandDialog from '@/components/search-command-dialog';
 import ThemeDropdownMenu from '@/components/theme-dropdown-menu';
 import { Link } from '@/components/ui/link';
 import { SITE } from '@/config';
+import { getPosts } from '@/lib/posts';
+
+const posts = await getPosts();
 ---
 
 <header
@@ -21,13 +23,7 @@ import { SITE } from '@/config';
       </Link>
     </div>
     <div class="flex items-center gap-x-0.5">
-      <!-- TODO: 화면 커지면 검색 버튼 크게 -->
-      <button
-        aria-label="검색"
-        class="rounded-full bg-transparent p-2.5 outline-none hover:bg-transparent/5 dark:hover:bg-default-50/5"
-      >
-        <Search strokeWidth="2.5" className="size-5" />
-      </button>
+      <SearchCommandDialog posts={posts} client:load />
       <!-- TODO: 클라이언트 컴포넌트 깜빡이는 문제 해결 -->
       <ThemeDropdownMenu client:only="react" />
       <NavDropdownMenu client:load />

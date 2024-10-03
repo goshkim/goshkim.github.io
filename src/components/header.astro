@@ -1,6 +1,7 @@
 ---
-import { EllipsisVertical, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 
+import NavDropdownMenu from '@/components/nav-dropdown-menu';
 import ThemeDropdownMenu from '@/components/theme-dropdown-menu';
 import { Link } from '@/components/ui/link';
 import { SITE } from '@/config';
@@ -27,14 +28,9 @@ import { SITE } from '@/config';
       >
         <Search strokeWidth="2.5" className="size-5" />
       </button>
-      <button
-        aria-label="네비게이션"
-        class="block rounded-full bg-transparent p-2.5 outline-none hover:bg-transparent/5 lg:hidden dark:hover:bg-default-50/10"
-      >
-        <EllipsisVertical strokeWidth="2.5" className="size-5" />
-      </button>
-      <!-- TODO: 클라이언트 컴포넌트 렌더링 표시 -->
+      <!-- TODO: 클라이언트 컴포넌트 깜빡이는 문제 해결 -->
       <ThemeDropdownMenu client:only="react" />
+      <NavDropdownMenu client:load />
     </div>
   </div>
 </header>

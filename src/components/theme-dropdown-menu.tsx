@@ -38,7 +38,7 @@ const ThemeDropdownMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        aria-label="테마"
+        aria-label="테마 변경"
         className="hidden rounded-full bg-transparent p-2.5 outline-none hover:bg-transparent/5 lg:block dark:hover:bg-default-50/5"
       >
         <Sun
@@ -51,14 +51,15 @@ const ThemeDropdownMenu = () => {
           data-theme={theme}
           className='hidden size-5 data-[theme="dark"]:text-primary-500 dark:block dark:data-[theme="dark"]:text-primary-400'
         />
+        <span className="sr-only">테마 변경</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="hidden lg:block">
+      <DropdownMenuContent align="end" className="hidden w-36 lg:block">
         {themeDropdownMenuItems.map(({ key, icon: Icon, label }) => {
           return (
             <DropdownMenuItem
               key={key}
               data-active={theme === key}
-              className="cursor-pointer font-semibold text-default-500 focus:text-default-700 data-[active=true]:text-primary-500 dark:text-default-400 dark:focus:text-default-200 data-[active=true]:dark:text-primary-400"
+              className="cursor-pointer text-base font-semibold text-default-500 focus:text-default-700 data-[active=true]:text-primary-500 dark:text-default-400 dark:focus:text-default-200 data-[active=true]:dark:text-primary-400"
               onClick={() => setTheme(key)}
             >
               <Icon strokeWidth="2.5" className="mr-2 size-5" /> {label}

@@ -46,8 +46,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         {children}
         {isExternal && (
           <ExternalLinkIcon
-            strokeWidth={2}
             style={{ width: '1em', height: '1em' }}
+            strokeWidth="2.5"
             className="ml-1"
           />
         )}

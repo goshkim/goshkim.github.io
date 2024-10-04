@@ -12,8 +12,8 @@ export default defineConfig({
     mdx({
       shikiConfig: {
         themes: {
-          light: 'github-light',
-          dark: 'github-dark',
+          light: 'catppuccin-latte',
+          dark: 'monokai',
         },
       },
     }),

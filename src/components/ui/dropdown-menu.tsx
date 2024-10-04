@@ -25,7 +25,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      'flex cursor-default select-none items-center rounded-md px-2 py-1.5 text-sm outline-none focus:bg-default-100 data-[state=open]:bg-default-100 dark:focus:bg-default-800 dark:data-[state=open]:bg-default-800',
+      'flex cursor-default select-none items-center rounded-md px-2 py-1.5 text-sm outline-none focus:bg-default-100 data-[state=open]:bg-default-100 dark:focus:bg-default-700 dark:data-[state=open]:bg-default-700',
       inset && 'pl-8',
       className,
     )}
@@ -125,7 +125,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   >
     <span className="absolute left-2 flex size-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Circle className="size-2 fill-current" />
+        <Circle className="size-1.5 fill-current" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -153,7 +153,7 @@ const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={cn('-mx-1 my-1 h-px bg-default-100 dark:bg-default-800', className)}
+    className={cn('-mx-1 my-1 h-px bg-default-200 dark:bg-default-700', className)}
     {...props}
   />
 ));

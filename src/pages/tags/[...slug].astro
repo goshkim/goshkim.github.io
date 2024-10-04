@@ -23,9 +23,11 @@ const { posts } = Astro.props;
 const tags = await getTags();
 ---
 
-<PageLayout seo={{ title: `'${slug}' 태그의 게시글 목록` }}>
-  <div class="flex flex-col gap-y-4">
-    <h5 class="font-bold tracking-tighter text-default-900 dark:text-default-50">태그 목록</h5>
+<PageLayout seo={{ title: `'${slug}' 태그 관련 글` }}>
+  <div class="mb-20 flex flex-col gap-y-4">
+    <h5 class="text-xl font-bold tracking-tighter text-default-900 dark:text-default-50">
+      태그 목록
+    </h5>
     <ul class="flex max-h-52 flex-wrap gap-2 overflow-y-auto">
       {
         tags.map(tag => {
@@ -54,9 +56,9 @@ const tags = await getTags();
   </div>
 
   <!-- TODO: 태그 게시글 ui 수정 -->
-  <div class="mt-20 flex flex-col gap-y-2">
-    <h5 class="font-bold tracking-tighter text-default-900 dark:text-default-50">
-      {`'${slug}' 태그의 게시글 목록`}
+  <div class="flex flex-col gap-y-2">
+    <h5 class="text-xl font-bold tracking-tighter text-default-900 dark:text-default-50">
+      {`'${slug}' 태그 관련 글 ${posts.length} 건`}
     </h5>
     <PostCardList posts={posts} />
   </div>

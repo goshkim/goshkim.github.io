@@ -1,5 +1,6 @@
 ---
 import PostCardList from '@/components/post-card-list.astro';
+import ProfileCard from '@/components/profile-card';
 import { Badge } from '@/components/ui/badge';
 import PageLayout from '@/layouts/page-layout.astro';
 import { getPosts, getTags } from '@/lib/posts';
@@ -16,9 +17,10 @@ const tags = await getTags();
     <aside
       class="sticky left-auto right-0 top-16 hidden max-h-screen w-80 overflow-y-auto bg-white lg:block dark:bg-default-900"
     >
-      <!-- TODO: 프로필 -->
-      <div class="sticky top-0 h-48 bg-inherit pt-6 text-default-900 dark:text-default-50">
-        프로필
+      <div class="sticky top-0 h-fit bg-inherit py-6 text-default-900 dark:text-default-50">
+        <div class="flex flex-col items-center gap-y-4">
+          <ProfileCard client:load />
+        </div>
       </div>
       <div class="flex flex-col gap-y-2">
         <h5 class="font-bold tracking-tighter text-default-900 dark:text-default-50">태그 목록</h5>

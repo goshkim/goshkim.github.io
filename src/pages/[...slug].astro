@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 
+import ProfileHoverCard from '@/components/profile-hover-card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@/components/ui/link';
 import { Separator } from '@/components/ui/separator';
@@ -35,8 +36,8 @@ const { Content, headings } = await render();
         {title}
       </h1>
       <div class="flex justify-between text-sm font-medium">
-        <!-- TODO: 프로필 카드, 상대 시간 표시, 읽는 시간 추가 -->
-        <strong>프로필 카드</strong>
+        <!-- TODO: 읽는 시간 추가 -->
+        <ProfileHoverCard client:load />
         <time>{relativePublishedDate}</time>
       </div>
       <ul class="flex flex-wrap gap-x-2 gap-y-1">

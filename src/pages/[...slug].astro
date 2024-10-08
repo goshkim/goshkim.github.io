@@ -7,7 +7,6 @@ import { Link } from '@/components/ui/link';
 import { Separator } from '@/components/ui/separator';
 import PostLayout from '@/layouts/post-layout.astro';
 import { getPosts } from '@/lib/posts';
-import { getRelativeTime } from '@/lib/utils';
 
 export const getStaticPaths = (async () => {
   const posts = await getPosts();
@@ -25,7 +24,6 @@ const {
   data: { title, excerpt, tags, series, nextPost, prevPost, publishedDate },
   render,
 } = Astro.props;
-const relativePublishedDate = getRelativeTime(publishedDate);
 const { Content, headings } = await render();
 ---
 
@@ -38,7 +36,7 @@ const { Content, headings } = await render();
       <div class="flex justify-between text-sm font-medium">
         <!-- TODO: 읽는 시간 추가 -->
         <ProfileHoverCard client:load />
-        <time>{relativePublishedDate}</time>
+        <time>{publishedDate.toLocaleDateString()}</time>
       </div>
       <ul class="flex flex-wrap gap-x-2 gap-y-1">
         {

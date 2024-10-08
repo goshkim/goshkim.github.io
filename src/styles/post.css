@@ -1,13 +1,38 @@
-.astro-code,
-.astro-code span {
-  background-color: rgb(var(--color-default-100)) !important;
+.prose {
+  @apply tracking-tight;
 }
 
-html.dark .astro-code,
-html.dark .astro-code span {
-  color: var(--shiki-dark) !important;
-  background-color: rgb(var(--color-default-800)) !important;
-  font-style: var(--shiki-dark-font-style) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
+.prose code {
+  @apply mx-0.5 rounded-md bg-default-100 p-1 font-bold text-default-900 before:content-none after:content-none dark:bg-default-800 dark:text-default-50 !important;
+}
+
+.prose .link {
+  @apply flex w-fit items-center no-underline hover:text-primary-500 dark:hover:text-primary-400;
+}
+
+.prose .external-link {
+  @apply inline-flex items-center gap-x-1;
+  @apply text-primary-500 underline underline-offset-2 dark:text-primary-400;
+}
+
+.prose pre[data-theme*=' '],
+.prose pre[data-theme*=' '] code,
+.prose pre[data-theme*=' '] span {
+  color: var(--shiki-light) !important;
+  background-color: rgb(var(--color-default-100)) !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+html.dark {
+  .prose pre[data-theme*=' '],
+  .prose pre[data-theme*=' '] code,
+  .prose pre[data-theme*=' '] span {
+    color: var(--shiki-dark) !important;
+    background-color: rgb(var(--color-default-800)) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
 }

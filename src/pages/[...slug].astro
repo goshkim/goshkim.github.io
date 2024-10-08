@@ -64,7 +64,7 @@ const { Content, headings } = await render();
               <li>
                 <Link
                   href={`/${entry.slug}`}
-                  underline="hover"
+                  underline="none"
                   data-active={slug === entry.slug}
                   className="hover:text-primary-500 data-[active=true]:text-primary-500 dark:hover:text-primary-400 dark:data-[active=true]:text-primary-400"
                 >
@@ -89,8 +89,8 @@ const { Content, headings } = await render();
             다음 게시글
           </h5>
           <Link
-            underline="hover"
             href={`/${nextPost.slug}`}
+            underline="none"
             className="hover:text-primary-500 dark:hover:text-primary-400"
           >
             {nextPost.data.title}
@@ -106,8 +106,8 @@ const { Content, headings } = await render();
             이전 게시글
           </h5>
           <Link
-            underline="hover"
             href={`/${prevPost.slug}`}
+            underline="none"
             className="hover:text-primary-500 dark:hover:text-primary-400"
           >
             {prevPost.data.title}

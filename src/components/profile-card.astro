@@ -14,7 +14,7 @@ const { username, githubUrl, email } = PROFILE;
   <CardHeader className="place-items-center p-2">
     <ProfileAvatar className="size-24" client:load />
   </CardHeader>
-  <CardContent className="p-2 text-center text-lg font-semibold">{username}</CardContent>
+  <CardContent className="p-2 text-center text-lg font-bold">{username}</CardContent>
   <CardFooter className="flex items-center justify-center gap-x-0.5 p-2">
     <Link
       href={`mailto:${email}`}

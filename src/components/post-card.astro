@@ -47,7 +47,7 @@ const postUrl = `/${slug}`;
       }
     </CardContent>
     <CardFooter className="px-0 text-sm font-medium">
-      <time>{publishedDate.toLocaleDateString()}</time>
+      <time>{publishedDate.toLocaleDateString('ko-KR')}</time>
     </CardFooter>
   </div>
   <Link href={postUrl} className="hidden h-fit w-48 shrink-0 overflow-hidden md:block">

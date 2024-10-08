@@ -35,7 +35,7 @@ const { Content, headings } = await render();
       <h1 class="text-4xl font-extrabold tracking-tighter">
         {title}
       </h1>
-      <time class="text-sm font-medium">{publishedDate.toLocaleDateString()}</time>
+      <time class="text-sm font-medium">{publishedDate.toLocaleDateString('ko-KR')}</time>
       <ul class="flex flex-wrap gap-x-2 gap-y-1">
         {
           tags.map(tag => (

@@ -43,14 +43,14 @@ const SearchCommandDialog = ({ posts }: SearchCommandDialogProps) => {
         {/* <CommandShortcut>/</CommandShortcut> */}
       </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="게시글 제목을 입력해 주세요" className="text-base" />
+        <CommandInput placeholder="게시글 제목을 입력해 주세요" />
         <CommandList>
-          <CommandEmpty className="py-6 text-center text-base font-medium">
+          <CommandEmpty className="py-6 text-center font-medium">
             검색 결과가 없습니다.
           </CommandEmpty>
           {posts.map(({ slug, data: { title } }) => (
             <CommandItem key={slug} asChild>
-              <Link href={`/${slug}`} underline="none" className="cursor-pointer text-base">
+              <Link href={`/${slug}`} underline="none" className="cursor-pointer">
                 {title}
               </Link>
             </CommandItem>

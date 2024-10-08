@@ -1,11 +1,10 @@
 ---
 import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 
-import ProfileAvatar from '@/components/profile-avatar';
+import PostNavigation from '@/components/post-navigation.astro';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@/components/ui/link';
 import { Separator } from '@/components/ui/separator';
-import { PROFILE } from '@/config';
 import PostLayout from '@/layouts/post-layout.astro';
 import { getPosts } from '@/lib/posts';
 
@@ -81,40 +80,9 @@ const { Content, headings } = await render();
       <Content />
     </div>
 
-    <!-- TOOD: 이전, 다음 게시글 ui 수정 -->
-    {
-      nextPost && (
-        <div class="flex flex-col gap-y-2">
-          <h5 class="font-semibold tracking-tighter text-default-900 dark:text-default-50">
-            다음 게시글
-          </h5>
-          <Link
-            href={`/${nextPost.slug}`}
-            underline="none"
-            className="hover:text-primary-500 dark:hover:text-primary-400"
-          >
-            {nextPost.data.title}
-          </Link>
-        </div>
-      )
-    }
+    <Separator />
 
-    {
-      prevPost && (
-        <div class="flex flex-col gap-y-2">
-          <h5 class="font-semibold tracking-tighter text-default-900 dark:text-default-50">
-            이전 게시글
-          </h5>
-          <Link
-            href={`/${prevPost.slug}`}
-            underline="none"
-            className="hover:text-primary-500 dark:hover:text-primary-400"
-          >
-            {prevPost.data.title}
-          </Link>
-        </div>
-      )
-    }
+    <PostNavigation prevPostSlug={prevPost?.slug} nextPostSlug={nextPost?.slug} />
 
     <!-- TODO: giscus 테마 커스터마이징 -->
     <div class="giscus"></div>

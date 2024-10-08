@@ -1,0 +1,68 @@
+---
+import { getEntry } from 'astro:content';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
+import { Link } from '@/components/ui/link';
+
+interface Props {
+  prevPostSlug?: string;
+  nextPostSlug?: string;
+}
+
+const { prevPostSlug, nextPostSlug } = Astro.props;
+
+const [prevPost, nextPost] = await Promise.all([
+  prevPostSlug ? getEntry('posts', prevPostSlug) : Promise.resolve(null),
+  nextPostSlug ? getEntry('posts', nextPostSlug) : Promise.resolve(null),
+]);
+---
+
+<nav class="flex flex-col-reverse gap-6 sm:flex-row">
+  {
+    prevPost ? (
+      <Link href={`/${prevPost.slug}`} underline="none" className="group flex-1">
+        <Card className="flex w-full flex-col gap-y-4 border-none bg-default-100 p-4 shadow-none dark:bg-default-800">
+          <CardHeader className="flex flex-row items-center justify-start p-0 text-sm font-medium">
+            <ChevronLeft
+              strokeWidth="2.5"
+              className="mr-1.5 size-4 transition-transform duration-200 ease-in-out group-hover:-translate-x-1.5 group-hover:scale-125"
+            />
+            이전 게시글
+          </CardHeader>
+          <CardContent className="line-clamp-1 p-0 text-left font-semibold transition-colors duration-200 ease-in-out group-hover:text-primary-500 dark:group-hover:text-primary-400">
+            {prevPost.data.title}
+          </CardContent>
+          <CardDescription className="line-clamp-1 p-0 text-left">
+            {prevPost.data.excerpt}
+          </CardDescription>
+        </Card>
+      </Link>
+    ) : (
+      <div class="flex-1" />
+    )
+  }
+  {
+    nextPost ? (
+      <Link href={`/${nextPost.slug}`} underline="none" className="group flex-1">
+        <Card className="flex w-full flex-col gap-y-4 border-none bg-default-100 p-4 shadow-none dark:bg-default-800">
+          <CardHeader className="flex flex-row items-center justify-end p-0 text-sm font-medium">
+            다음 게시글{' '}
+            <ChevronRight
+              strokeWidth="2.5"
+              className="ml-1.5 size-4 transition-transform duration-200 ease-in-out group-hover:translate-x-1.5 group-hover:scale-125"
+            />
+          </CardHeader>
+          <CardContent className="line-clamp-1 p-0 text-right font-semibold transition-colors duration-200 ease-in-out group-hover:text-primary-500 dark:group-hover:text-primary-400">
+            {nextPost.data.title}
+          </CardContent>
+          <CardDescription className="line-clamp-1 p-0 text-right">
+            {nextPost.data.excerpt}
+          </CardDescription>
+        </Card>
+      </Link>
+    ) : (
+      <div class="flex-1" />
+    )
+  }
+</nav>

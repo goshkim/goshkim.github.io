@@ -2,6 +2,7 @@
 import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 
 import PostNavigation from '@/components/post-navigation.astro';
+import PostSeriesNavigation from '@/components/post-series-navigation.astro';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@/components/ui/link';
 import { Separator } from '@/components/ui/separator';
@@ -52,29 +53,7 @@ const { Content, headings } = await render();
 
     <Separator />
 
-    {
-      series && (
-        <div class="space-y-4 rounded-md bg-default-100 p-4 dark:bg-default-800">
-          <h5 class="text-lg font-semibold tracking-tighter text-default-900 dark:text-default-50">
-            '{series.name}' 시리즈
-          </h5>
-          <ul class="list-inside list-decimal space-y-1">
-            {series.entries.map(entry => (
-              <li>
-                <Link
-                  href={`/${entry.slug}`}
-                  underline="none"
-                  data-active={slug === entry.slug}
-                  className="hover:text-primary-500 data-[active=true]:text-primary-500 dark:hover:text-primary-400 dark:data-[active=true]:text-primary-400"
-                >
-                  {entry.data.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
+    <PostSeriesNavigation series={series} />
 
     <div class="prose prose-slate dark:prose-invert">
       <Content />

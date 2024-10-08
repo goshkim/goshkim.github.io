@@ -1,0 +1,59 @@
+---
+import { type ValidContentEntrySlug } from 'astro:content';
+import { getEntries } from 'astro:content';
+
+import { Link } from '@/components/ui/link';
+
+interface Props {
+  series?: {
+    name: string;
+    entries: {
+      collection: 'posts';
+      slug: ValidContentEntrySlug<'posts'>;
+    }[];
+  };
+}
+
+const { series } = Astro.props;
+
+const seriesEntries = series ? await getEntries(series.entries) : null;
+---
+
+{
+  seriesEntries && (
+    <nav
+      aria-labelledby="series-title"
+      class="space-y-4 rounded-md bg-default-100 p-4 dark:bg-default-800"
+    >
+      <h2
+        id="series-title"
+        class="text-lg font-semibold tracking-tighter text-default-900 dark:text-default-50"
+      >
+        '{series!.name}' 시리즈
+      </h2>
+      <ol class="list-inside list-decimal space-y-1">
+        {seriesEntries.map(entry => {
+          const {
+            slug,
+            data: { title },
+          } = entry;
+          const postPath = `/${slug}`;
+          const isActive = Astro.url.pathname === postPath;
+
+          return (
+            <li>
+              <Link
+                href={postPath}
+                underline="none"
+                data-active={isActive}
+                className="hover:text-primary-500 data-[active=true]:text-primary-500 dark:hover:text-primary-400 dark:data-[active=true]:text-primary-400"
+              >
+                {title}
+              </Link>
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  )
+}

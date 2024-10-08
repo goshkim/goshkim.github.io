@@ -1,6 +1,6 @@
 ---
 import PostCardList from '@/components/post-card-list.astro';
-import ProfileCard from '@/components/profile-card';
+import ProfileCard from '@/components/profile-card.astro';
 import { Badge } from '@/components/ui/badge';
 import PageLayout from '@/layouts/page-layout.astro';
 import { getPosts, getTags } from '@/lib/posts';
@@ -19,7 +19,7 @@ const tags = await getTags();
     >
       <div class="sticky top-0 h-fit bg-inherit py-6 text-default-900 dark:text-default-50">
         <div class="flex flex-col items-center gap-y-4">
-          <ProfileCard client:load />
+          <ProfileCard />
         </div>
       </div>
       <div class="flex flex-col gap-y-2">

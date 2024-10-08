@@ -1,10 +1,11 @@
 ---
 import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
 
-import ProfileHoverCard from '@/components/profile-hover-card';
+import ProfileAvatar from '@/components/profile-avatar';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@/components/ui/link';
 import { Separator } from '@/components/ui/separator';
+import { PROFILE } from '@/config';
 import PostLayout from '@/layouts/post-layout.astro';
 import { getPosts } from '@/lib/posts';
 
@@ -24,6 +25,7 @@ const {
   data: { title, excerpt, tags, series, nextPost, prevPost, publishedDate },
   render,
 } = Astro.props;
+
 const { Content, headings } = await render();
 ---
 
@@ -33,11 +35,7 @@ const { Content, headings } = await render();
       <h1 class="text-4xl font-extrabold tracking-tighter">
         {title}
       </h1>
-      <div class="flex justify-between text-sm font-medium">
-        <!-- TODO: 읽는 시간 추가 -->
-        <ProfileHoverCard client:load />
-        <time>{publishedDate.toLocaleDateString()}</time>
-      </div>
+      <time class="text-sm font-medium">{publishedDate.toLocaleDateString()}</time>
       <ul class="flex flex-wrap gap-x-2 gap-y-1">
         {
           tags.map(tag => (

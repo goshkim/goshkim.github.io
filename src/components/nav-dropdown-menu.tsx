@@ -48,7 +48,7 @@ const NavDropdownMenu = () => {
               href={href}
               underline="none"
               isExternal={isExternal}
-              className="w-fit cursor-pointer text-base font-semibold text-default-900 transition-colors duration-200 ease-in-out focus:bg-[initial] focus:text-primary-500 dark:text-default-50 dark:focus:text-primary-400"
+              className="w-fit cursor-pointer font-semibold text-default-900 transition-colors duration-200 ease-in-out focus:bg-transparent focus:text-primary-500 dark:text-default-50 dark:focus:bg-transparent dark:focus:text-primary-400"
             >
               {label}
             </Link>
@@ -57,10 +57,8 @@ const NavDropdownMenu = () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger className="text-base font-semibold">
-              테마 변경
-            </DropdownMenuSubTrigger>
-            <DropdownMenuSubContent className="dark:border-default-700">
+            <DropdownMenuSubTrigger className="font-semibold">테마 변경</DropdownMenuSubTrigger>
+            <DropdownMenuSubContent>
               <DropdownMenuRadioGroup
                 value={theme}
                 onValueChange={value => setTheme(value as ThemeKey)}
@@ -69,7 +67,8 @@ const NavDropdownMenu = () => {
                   <DropdownMenuRadioItem
                     key={key}
                     value={key}
-                    className="text-base font-medium dark:focus:bg-default-700"
+                    data-active={theme === key}
+                    className="font-medium data-[active=true]:text-primary-500 data-[active=true]:dark:text-primary-400"
                   >
                     {value}
                   </DropdownMenuRadioItem>

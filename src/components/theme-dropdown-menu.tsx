@@ -59,7 +59,7 @@ const ThemeDropdownMenu = () => {
             <DropdownMenuItem
               key={key}
               data-active={theme === key}
-              className="cursor-pointer text-base font-semibold text-default-500 focus:text-default-700 data-[active=true]:text-primary-500 dark:text-default-400 dark:focus:text-default-200 data-[active=true]:dark:text-primary-400"
+              className="cursor-pointer font-medium data-[active=true]:text-primary-500 data-[active=true]:dark:text-primary-400"
               onClick={() => setTheme(key)}
             >
               <Icon strokeWidth="2.5" className="mr-2 size-5" /> {label}

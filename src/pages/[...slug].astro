@@ -1,10 +1,10 @@
 ---
-import type { GetStaticPaths, InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 import PostNavigation from '@/components/post-navigation.astro';
 import PostSeriesNavigation from '@/components/post-series-navigation.astro';
+import TableOfContents from '@/components/table-of-contents';
 import { Badge } from '@/components/ui/badge';
-import { Link } from '@/components/ui/link';
 import { Separator } from '@/components/ui/separator';
 import PostLayout from '@/layouts/post-layout.astro';
 import { getPosts } from '@/lib/posts';
@@ -17,10 +17,9 @@ export const getStaticPaths = (async () => {
   }));
 }) satisfies GetStaticPaths;
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+// type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { slug }: Params = Astro.params;
 const {
   data: { title, excerpt, tags, series, nextPost, prevPost, publishedDate },
   render,
@@ -64,23 +63,26 @@ const { Content, headings } = await render();
     <PostNavigation prevPostSlug={prevPost?.slug} nextPostSlug={nextPost?.slug} />
 
     <!-- TODO: giscus 테마 커스터마이징 -->
+    <script
+      is:inline
+      src="https://giscus.app/client.js"
+      data-repo="goshkim/goshkim.github.io"
+      data-repo-id="R_kgDOM6Jf3g"
+      data-category="Comments"
+      data-category-id="DIC_kwDOM6Jf3s4Ci-ne"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="transparent_dark"
+      data-lang="ko"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async></script>
     <div class="giscus"></div>
   </article>
 
   <!-- TODO: toc 완성 -->
-  <ul slot="toc" class="flex flex-col">
-    {
-      headings.map(({ slug, depth, text }) => (
-        <li>
-          <Link
-            href={`#${slug}`}
-            underline="none"
-            className="font-medium hover:text-primary-500 dark:hover:text-primary-400"
-          >
-            {text}
-          </Link>
-        </li>
-      ))
-    }
-  </ul>
+  <TableOfContents slot="toc" headings={headings} client:load />
 </PostLayout>

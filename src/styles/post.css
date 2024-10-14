@@ -15,6 +15,10 @@
   @apply text-primary-500 underline underline-offset-2 dark:text-primary-400;
 }
 
+.prose .active-toc-item {
+  @apply text-2xl font-bold text-primary-500 dark:text-primary-400;
+}
+
 .prose pre[data-theme*=' '],
 .prose pre[data-theme*=' '] code,
 .prose pre[data-theme*=' '] span {
